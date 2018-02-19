@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1519028203 source:c:\users\kylef\dropbox\programs\sdl\neural net\node.cpp
+1519034756 source:c:\users\kylef\dropbox\programs\sdl\neural net\node.cpp
 	"Node.h"
 
-1519026606 c:\users\kylef\dropbox\programs\sdl\neural net\node.h
+1519034543 c:\users\kylef\dropbox\programs\sdl\neural net\node.h
 	"Math.h"
 	<vector>
 	<cstdlib>
@@ -12,18 +12,18 @@
 	<cmath>
 	<iostream>
 
-1519028107 source:c:\users\kylef\dropbox\programs\sdl\neural net\layer.cpp
+1519034587 source:c:\users\kylef\dropbox\programs\sdl\neural net\layer.cpp
 	"Layer.h"
 
-1519028059 c:\users\kylef\dropbox\programs\sdl\neural net\layer.h
+1519032483 c:\users\kylef\dropbox\programs\sdl\neural net\layer.h
 	"Node.h"
 
-1519028043 source:c:\users\kylef\dropbox\programs\sdl\neural net\neuralnet.cpp
+1519034419 source:c:\users\kylef\dropbox\programs\sdl\neural net\neuralnet.cpp
 	"NeuralNet.h"
 
 1519026714 c:\users\kylef\dropbox\programs\sdl\neural net\neuralnet.h
 	"Layer.h"
 
-1519028273 source:c:\users\kylef\dropbox\programs\sdl\neural net\main.cpp
+1519034837 source:c:\users\kylef\dropbox\programs\sdl\neural net\main.cpp
 	"NeuralNet.h"
 

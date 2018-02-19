@@ -14,11 +14,11 @@ void Layer::calculate(std::vector<float> inputs){
     }
 }
 
-void Layer::backProporgate(std::vector<float> errors, std::vector<float> outputs){
-    _errors.clear();
-    for(int i = 0; i < (int)errors.size(); i++){
-        _nodes[i]->backProporgate(errors[i], outputs[i]);
-        _errors.push_back(_nodes[i]->error());
+void Layer::backProporgate(std::vector<float> error, std::vector<float> output){
+    _error.clear();
+    for(int i = 0; i < (int)error.size(); i++){
+        _nodes[i]->backProporgate(error[i], output);
+        _error.push_back(_nodes[i]->error());
     }
 
 }

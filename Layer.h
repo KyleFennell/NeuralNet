@@ -10,13 +10,13 @@ public:
 
     void calculate(std::vector<float> inputs);
     std::vector<float> output(){ return _output; }
-    void backProporgate(std::vector<float> errors, std::vector<float> outputs);
-    std::vector<float> errors(){ return _errors; }
+    void backProporgate(std::vector<float> error, std::vector<float> output);
+    std::vector<float> error(){ return _error; }
 
 private:
 
     std::vector<Node*> _nodes;
     std::vector<float> _output;
-    std::vector<float> _errors;
+    std::vector<float> _error;
 
 };

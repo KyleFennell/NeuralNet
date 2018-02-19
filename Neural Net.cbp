@@ -31,6 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add option="-lmingw32" />
+		</Linker>
+		<Unit filename="Layer.cpp" />
+		<Unit filename="Layer.h" />
+		<Unit filename="Math.h" />
+		<Unit filename="NeuralNet.cpp" />
+		<Unit filename="NeuralNet.h" />
+		<Unit filename="Node.cpp" />
+		<Unit filename="Node.h" />
+		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -12,7 +12,7 @@ NeuralNet::NeuralNet(std::vector<int> layerSize){
 void NeuralNet::calculate(std::vector<float> input){
     _layers[0]->calculate(input);
     for(int i = 1; i < (int)_layers.size(); i++){
-        _layers[i]->calculate(_layers[0]->output());
+        _layers[i]->calculate(_layers[i-1]->output());
     }
     _output = _layers[_layers.size()-1]->output();
 }
@@ -20,6 +20,6 @@ void NeuralNet::calculate(std::vector<float> input){
 void NeuralNet::backProporgate(std::vector<float> error){
     _layers[_layers.size()-1]->backProporgate(error, _layers[_layers.size()-2]->output());
     for (int i = _layers.size()-2; i >= 0; i--){
-        _layers[i]->backProporgate(error, _layers[i+1]->output());
+        _layers[i]->backProporgate(_layers[i+1]->error(), _layers[i-1]->output());
     }
 }

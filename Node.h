@@ -12,7 +12,7 @@ public:
 
     void calculate(std::vector<float> intputs);
     float output(){ return _output; }
-    void backProporgate(float error, float output);
+    void backProporgate(float errorOfPrev, std::vector<float> outputOfNext);
     float error(){ return _error; }
 
 private:
