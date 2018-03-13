@@ -1,39 +1,36 @@
-#include "Matrix.h"
-#include <math.h>
+#include <armadillo>        //almost everything (matrecies)
+#include <math.h>           //pow
+#include <memory>           //smart pointers
 
 class NeuralNet{
 public:
 
     NeuralNet(std::vector<int> shape, bool bias);
 
-    void epoch(std::vector<std::vector<float>> inputs, std::vector<std::vector<float>> targets);
-    void printReport(std::vector<std::vector<float>> inputs, std::vector<std::vector<float>> targets);
+    float epoch(std::vector<arma::mat> inputs, std::vector<arma::mat> targets);
+    void printReport(std::vector<arma::mat>inputs, std::vector<arma::mat>targets);
 
-    std::shared_ptr<Matrix> feedForward(std::vector<float> inputs);
-    void backPropagate(std::shared_ptr<Matrix> errors, std::vector<float> inputs);
+    arma::mat feedForward(arma::mat inputs);
+    void backPropagate(arma::mat errors, arma::mat inputs);
 
     void printWeights();
 
 private:
 
-    static std::shared_ptr<Matrix> logistic(std::shared_ptr<Matrix> m){
-        std::vector<std::vector<float>> out = std::vector<std::vector<float>>(m->height(), std::vector<float>(m->width()));
-        for (int i = 0; i < m->height(); i++){
-            for (int j = 0; j < m->width(); j++){
-                out[i][j] = logistic(m->data()[i][j]);
-            }
-        }
-        return std::make_shared<Matrix>(out);
+    static arma::mat logistic(arma::mat m){
+        return m.for_each( [](arma::mat::elem_type& val) { val = logistic(val); } );
     }
 
-    static std::shared_ptr<Matrix> dirLogistic(std::shared_ptr<Matrix> m){
-        std::vector<std::vector<float>> out = std::vector<std::vector<float>>(m->height(), std::vector<float>(m->width()));
-        for (int i = 0; i < m->height(); i++){
-            for (int j = 0; j < m->width(); j++){
-                out[i][j] = dirLogistic(m->data()[i][j]);
-            }
-        }
-        return std::make_shared<Matrix>(out);
+    static arma::mat dirLogistic(arma::mat m){
+        return m.for_each( [](arma::mat::elem_type& val) { val = dirLogistic(val); } );
+    }
+
+    static arma::mat addConst(arma::mat m, float add){
+        return m.for_each( [add](arma::mat::elem_type& val) { val = val + add; } );
+    }
+
+    static arma::mat multConst(arma::mat m, float mult){
+        return m.for_each( [mult](arma::mat::elem_type& val) { val = val * mult; } );
     }
 
     static float logistic(float in){
@@ -45,12 +42,14 @@ private:
         return a*(1-a);
     }
 
-    bool _bias = false;
-    std::vector<std::shared_ptr<Matrix>> _biases;
-    std::vector<std::shared_ptr<Matrix>> _weights;
-    std::vector<std::shared_ptr<Matrix>> _layerOutputs;
+    static void size(arma::mat m){
+        std::cout << "(" << m.n_cols << "," << m.n_rows << ")" << std::endl;
+    }
 
-    const float LEARNINGRATE = 0.05;
-    const float WEIGHTDECAY = 1;
-    const float MOMENTUM = 0.9;
+    bool _bias = false;
+    std::vector<arma::mat> _biases;
+    std::vector<arma::mat> _weights;
+    std::vector<arma::mat> _layerOutputs;
+
+    constexpr static float LEARNINGRATE = 0.06;
 };
